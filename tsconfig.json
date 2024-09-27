@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    // Target latest version of ECMAScript
+    "target": "ES2022",
+
+    // Use module system for both browser and Node.js
+    "module": "Node16",
+
+    // Allow JavaScript files to be processed
+    "allowJs": true,
+
+    // Enable strict type checking
+    "strict": true,
+
+    // Check JS files
+    "checkJs": true,
+
+    // Don't emit outputs
+    "noEmit": true,
+
+    // Enable all strict type checking options
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+
+    // Additional checks
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // Module resolution for both Node.js and browser
+    "moduleResolution": "NodeNext",
+
+    // Enable JSDoc comments to be used for type information
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    // Ensure that .d.ts files are created by tsc, but not .js files
+    "declaration": true,
+    "emitDeclarationOnly": true,
+
+    // Ensure that Babel can safely transpile files in the TypeScript project
+    "isolatedModules": true,
+
+    // Add support for DOM types and Node.js types
+    "lib": ["ES2022", "DOM"]
+  },
+  "include": ["src/**/*.js", "test/**/*.js"],
+  "exclude": ["node_modules", "dist"]
+}
