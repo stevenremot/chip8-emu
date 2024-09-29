@@ -1,3 +1,4 @@
+import { AnimationFrameLoop } from "./animation-frame-loop.js";
 import { makeInstruction } from "./instructions/make-instruction.js";
 import { State } from "./state.js";
 
@@ -10,27 +11,11 @@ export class Runner {
   }
 
   run() {
-    const targetFPS = 700;
-    const frameInterval = 1000 / targetFPS;
-    let lastFrameTime = /** @type { number | null } */ (null);
-    let accumulatedTime = 0;
+    const loop = new AnimationFrameLoop(() => {
+      this.runOneInstruction();
+    }, 700);
 
-    const step = (/** @type {number} */ timestamp) => {
-      if (lastFrameTime !== null) {
-        accumulatedTime += timestamp - lastFrameTime;
-      }
-
-      lastFrameTime = timestamp;
-
-      while (accumulatedTime >= frameInterval) {
-        this.runOneInstruction();
-        accumulatedTime -= frameInterval;
-      }
-
-      requestAnimationFrame(step);
-    };
-
-    requestAnimationFrame(step);
+    loop.start();
   }
 
   runOneInstruction() {
