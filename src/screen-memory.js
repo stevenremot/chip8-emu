@@ -25,7 +25,7 @@ export class ScreenMemory {
 
     // Clip sprite to screen
     const spriteWidth = Math.min(8, WIDTH - screenX);
-    const spriteHeight = Math.min(sprite.length, HEIGHT - screenY);
+    const spriteHeight = Math.min(sprite.length / 2, HEIGHT - screenY);
 
     for (let y = 0; y < spriteHeight; y++) {
       // For each row, apply the XOR twice as our screen is split ito 8 pixels groups

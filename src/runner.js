@@ -15,7 +15,7 @@ export class Runner {
       this.runOneInstruction();
     }, 700);
 
-    loop.start();
+    return loop.start();
   }
 
   runOneInstruction() {

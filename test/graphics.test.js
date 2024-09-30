@@ -3,41 +3,13 @@ import assert from "node:assert";
 import { State } from "../src/state.js";
 import { Runner } from "../src/runner.js";
 import { ScreenMemory } from "../src/screen-memory.js";
+import { screenMemoryToASCII } from "../src/utils/screen-memory-to-ascii.js";
 
 const makeTestInstance = () => {
   const state = State.makeClearState();
   const runner = new Runner(state);
 
   return { state, runner };
-};
-
-/**
- * @param {ScreenMemory} screenMemory
- */
-const screenMemoryToASCII = (
-  screenMemory,
-  [[xStart, width], [yStart, height]] = [
-    [0, 64],
-    [0, 32],
-  ],
-) => {
-  const asciiScreen = Array.from({ length: height }, () =>
-    Array.from({ length: width }, () => " "),
-  );
-
-  screenMemory.forEachPixel((x, y, isLit) => {
-    if (x < xStart || x >= xStart + width) {
-      return;
-    }
-
-    if (y < yStart || y >= yStart + height) {
-      return;
-    }
-
-    asciiScreen[y - yStart][x - xStart] = isLit ? "#" : ".";
-  });
-
-  return asciiScreen.map((row) => row.join("")).join("\n");
 };
 
 /**

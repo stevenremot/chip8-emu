@@ -47,6 +47,6 @@ export class CanvasRenderer {
       this.render();
     }, 60);
 
-    animationLoop.start();
+    return animationLoop.start();
   }
 }

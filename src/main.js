@@ -1,36 +1,46 @@
+import { AnimationFrameLoop } from "./animation-frame-loop.js";
 import { CanvasRenderer } from "./canvas-renderer.js";
 import { Runner } from "./runner.js";
-import { State } from "./state.js";
+import { screenMemoryToASCII } from "./utils/screen-memory-to-ascii.js";
+import { WebFileLoader } from "./web-file-loader.js";
+
+/**
+ * @type {AnimationFrameLoop[]}
+ */
+let loops = [];
 
 function start() {
-  const state = State.makeClearState();
-
-  state.registers.I = 0x500;
-  state.registers.V[0] = 0x03 + 64;
-  state.registers.V[1] = 0x0f + 32;
-
-  state.mainMemory.writeRange(
-    state.registers.I,
-    new Uint8Array([0xf0, 0xf0, 0x0f, 0x0f]),
-  );
-  state.mainMemory.writeRange(state.registers.PC, new Uint8Array([0xd0, 0x14]));
-
   const canvas = document.getElementById("canvas");
 
   if (!canvas) {
     throw new Error("Could not find canvas element");
   }
 
-  const canvasRenderer = new CanvasRenderer(
-    /** @type {HTMLCanvasElement} */ (canvas),
-    state.screenMemory,
-  );
-  const runner = new Runner(state);
+  const input = document.getElementById("rom-loader");
 
-  canvasRenderer.startRenderLoop();
-  runner.runOneInstruction();
+  if (!input) {
+    throw new Error("Could not find input element");
+  }
 
-  Object.assign(window, { state });
+  const webFileLoader = new WebFileLoader((state) => {
+    loops.forEach((loop) => loop.stop());
+
+    Object.assign(window, {
+      state,
+      debugScreen: () => screenMemoryToASCII(state.screenMemory),
+    });
+
+    loops = [
+      new Runner(state).run(),
+
+      new CanvasRenderer(
+        /** @type {HTMLCanvasElement} */ (canvas),
+        state.screenMemory,
+      ).startRenderLoop(),
+    ];
+  });
+
+  webFileLoader.attachToInput(/** @type {HTMLInputElement} */ (input));
 }
 
 document.addEventListener("DOMContentLoaded", start);

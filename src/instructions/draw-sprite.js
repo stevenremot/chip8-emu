@@ -5,6 +5,7 @@ const yMask = 0x00f0;
 const xMask = 0x0f00;
 
 export class DrawSprite {
+  static mask = 0xf000;
   static opcode = 0xd000;
 
   /**
@@ -25,7 +26,7 @@ export class DrawSprite {
     const x = state.registers.V[xRegister];
     const y = state.registers.V[yRegister];
 
-    const sprite = state.mainMemory.readRange(state.registers.I, n);
+    const sprite = state.mainMemory.readRange(state.registers.I, n * 2);
 
     const result = state.screenMemory.applySprite(x, y, sprite);
     state.registers.V[0xf] = result ? 1 : 0;

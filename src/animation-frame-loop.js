@@ -6,6 +6,7 @@ export class AnimationFrameLoop {
   constructor(callback, fps) {
     this.callback = callback;
     this.fps = fps;
+    this.animationFrameId = null;
   }
 
   start() {
@@ -24,9 +25,18 @@ export class AnimationFrameLoop {
         accumulatedTime -= frameInterval;
       }
 
-      requestAnimationFrame(loop);
+      this.animationFrameId = requestAnimationFrame(loop);
     };
 
-    requestAnimationFrame(loop);
+    this.animationFrameId = requestAnimationFrame(loop);
+    return this;
+  }
+
+  stop() {
+    if (this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+    }
+    return this;
   }
 }
