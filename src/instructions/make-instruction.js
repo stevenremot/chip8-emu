@@ -1,8 +1,11 @@
 import { AddToVRegister } from "./add-to-v-register.js";
+import { CallSubroutine } from "./call-subroutine.js";
 import { ClearScreen } from "./clear-screen.js";
+import { DoArithmeticInVRegister } from "./do-arithmetic-in-v-register.js";
 import { DrawSprite } from "./draw-sprite.js";
 import { Jump } from "./jump.js";
 import { Noop } from "./noop.js";
+import { ReturnFromSubroutine } from "./return-from-subroutine.js";
 import { SetIndexPointer } from "./set-index-pointer.js";
 import { SetVRegister } from "./set-v-register.js";
 import { SkipOnVRegisterValueEquals } from "./skip-on-v-register-value-equals.js";
@@ -22,6 +25,7 @@ const instructions = [
   SkipOnVRegisterValueNotEquals,
   SkipOnVRegistersValuesEquals,
   SkipOnVRegistersValuesNotEquals,
+  DoArithmeticInVRegister,
 ];
 
 /**
