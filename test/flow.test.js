@@ -37,7 +37,21 @@ describe("Program flow", () => {
     assert.strictEqual(state.registers.PC, 0x336);
   });
 
-  it.todo("Should jump and return from subroutines on 0x2MMM and 0x1MMM");
+  it("Should jump and return from subroutines on 0x2MMM and 0x00EE", () => {
+    const state = State.makeClearState();
+    const runner = new Runner(state);
+
+    state.mainMemory.writeRange(
+      state.registers.PC,
+      new Uint8Array([0x22, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0xee]),
+    );
+
+    runner.runOneInstruction();
+    assert.strictEqual(state.registers.PC, 0x206);
+
+    runner.runOneInstruction();
+    assert.strictEqual(state.registers.PC, 0x202);
+  });
 
   it("Should skip next instruction if VX=KK on 0x3XKK", () => {
     const state = State.makeClearState();

@@ -21,6 +21,8 @@ const instructions = [
   SetVRegister,
   AddToVRegister,
   Jump,
+  CallSubroutine,
+  ReturnFromSubroutine,
   SkipOnVRegisterValueEquals,
   SkipOnVRegisterValueNotEquals,
   SkipOnVRegistersValuesEquals,
