@@ -10,10 +10,16 @@ A basic web-basec CHIP-8 emulator, made for training purposes.
 - [X] Register
 - [X] Program runner
 - [X] Test runner
-- [ ] File loader (local + web)
+- [X] File loader (local + web)
 - [X] Screen : Instructions
 - [X] Screen : canvas renderer
-- [ ] IBM logo
+- [X] IBM logo
+- [X] Write tests for all instructions
+- [ ] Registers
+- [ ] Control flow
+- [ ] Inputs
+- [ ] Fonts
+- [ ] Sound
 
 ## Resources
 

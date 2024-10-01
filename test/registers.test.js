@@ -43,4 +43,18 @@ describe("Registers", () => {
 
     assert.strictEqual(state.registers.V[2], 0x5e);
   });
+
+  it.todo("Should copy VY to VX on 0x8XY0");
+
+  it.todo("Should perform VX=VX|VY on Ox8XY1");
+
+  it.todo("Should perform VX=VX&VY on Ox8XY2");
+
+  it.todo("Should perform VX=VX^VY on Ox8XY3");
+
+  it.todo("Should perform VX=VX+VY on Ox8XY4");
+
+  it.todo("Should perform VX=VX-VY on Ox8XY5");
+
+  it.todo("Add VX to I on 0xFX1E");
 });
