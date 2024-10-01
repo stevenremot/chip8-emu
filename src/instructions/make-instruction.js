@@ -2,16 +2,26 @@ import { AddToVRegister } from "./add-to-v-register.js";
 import { ClearScreen } from "./clear-screen.js";
 import { DrawSprite } from "./draw-sprite.js";
 import { Jump } from "./jump.js";
+import { Noop } from "./noop.js";
 import { SetIndexPointer } from "./set-index-pointer.js";
 import { SetVRegister } from "./set-v-register.js";
+import { SkipOnVRegisterValueEquals } from "./skip-on-v-register-value-equals.js";
+import { SkipOnVRegisterValueNotEquals } from "./skip-on-v-register-value-not-equals.js";
+import { SkipOnVRegistersValuesEquals } from "./skip-on-v-registers-values-equals.js";
+import { SkipOnVRegistersValuesNotEquals } from "./skip-on-v-registers-values-not-equals.js";
 
 const instructions = [
+  Noop,
   ClearScreen,
   DrawSprite,
   SetIndexPointer,
   SetVRegister,
   AddToVRegister,
   Jump,
+  SkipOnVRegisterValueEquals,
+  SkipOnVRegisterValueNotEquals,
+  SkipOnVRegistersValuesEquals,
+  SkipOnVRegistersValuesNotEquals,
 ];
 
 /**
