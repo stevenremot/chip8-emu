@@ -34,6 +34,19 @@ const operations = {
       ? { result: result + 0x100, carry: 0 }
       : { result, carry: 1 };
   },
+  7: function substractInv(a, b) {
+    const result = b - a;
+
+    return result < 0
+      ? { result: result + 0x100, carry: 0 }
+      : { result, carry: 1 };
+  },
+  6: function shiftRight(_a, b) {
+    return { result: b >> 1, carry: b & 1 };
+  },
+  [0xe]: function shiftRight(_a, b) {
+    return { result: (b << 1) & 0xff, carry: b >> 7 };
+  },
 };
 
 export class DoArithmeticInVRegister {

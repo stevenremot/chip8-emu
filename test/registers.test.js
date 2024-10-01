@@ -152,5 +152,59 @@ describe("Registers", () => {
     assert.strictEqual(state.registers.V[0xf], 0);
   });
 
+  it("Should perform VX=VY-VX and set the carry in VF on Ox8XY7", () => {
+    const state = State.makeClearState();
+    const runner = new Runner(state);
+
+    state.registers.V[0] = 0xf0;
+    state.registers.V[0xa] = 1;
+    state.registers.V[9] = 0xff;
+
+    state.mainMemory.writeRange(
+      state.registers.PC,
+      new Uint8Array([0x80, 0x97, 0x80, 0xa7]),
+    );
+    runner.runOneInstruction();
+
+    assert.strictEqual(state.registers.V[0], 0x0f);
+    assert.strictEqual(state.registers.V[0xf], 1);
+
+    runner.runOneInstruction();
+    assert.strictEqual(state.registers.V[0], 0xf2);
+    assert.strictEqual(state.registers.V[0xf], 0);
+  });
+
+  it("Should perform VX=VY>>1 and set the carry in VF on Ox8XY6", () => {
+    const state = State.makeClearState();
+    const runner = new Runner(state);
+
+    state.registers.V[0] = 0xf0;
+    state.registers.V[0xa] = 0xf9;
+    state.mainMemory.writeRange(
+      state.registers.PC,
+      new Uint8Array([0x80, 0xa6]),
+    );
+    runner.runOneInstruction();
+
+    assert.strictEqual(state.registers.V[0], 0x7c);
+    assert.strictEqual(state.registers.V[0xf], 1);
+  });
+
+  it("Should perform VX=VY<<1 and set the carry in VF on Ox8XYE", () => {
+    const state = State.makeClearState();
+    const runner = new Runner(state);
+
+    state.registers.V[0] = 0xf0;
+    state.registers.V[0xa] = 0xf9;
+    state.mainMemory.writeRange(
+      state.registers.PC,
+      new Uint8Array([0x80, 0xae]),
+    );
+    runner.runOneInstruction();
+
+    assert.strictEqual(state.registers.V[0], 0xf2);
+    assert.strictEqual(state.registers.V[0xf], 1);
+  });
+
   it.todo("Add VX to I on 0xFX1E");
 });
