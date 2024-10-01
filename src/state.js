@@ -1,3 +1,4 @@
+import { FontLoader } from "./font-loader.js";
 import { MainMemory } from "./main-memory.js";
 import { Registers } from "./registers.js";
 import { ScreenMemory } from "./screen-memory.js";
@@ -7,6 +8,8 @@ export class State {
     const mainMemory = new MainMemory();
     const screenMemory = new ScreenMemory();
     const registers = new Registers();
+
+    FontLoader.loadFont(mainMemory);
 
     return new State(mainMemory, screenMemory, registers);
   }

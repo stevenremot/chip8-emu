@@ -4,6 +4,7 @@ import { ClearScreen } from "./clear-screen.js";
 import { DoArithmeticInVRegister } from "./do-arithmetic-in-v-register.js";
 import { DrawSprite } from "./draw-sprite.js";
 import { Jump } from "./jump.js";
+import { LoadFont } from "./load-font.js";
 import { Noop } from "./noop.js";
 import { ReturnFromSubroutine } from "./return-from-subroutine.js";
 import { SetIndexPointer } from "./set-index-pointer.js";
@@ -17,6 +18,7 @@ const instructions = [
   Noop,
   ClearScreen,
   DrawSprite,
+  LoadFont,
   SetIndexPointer,
   SetVRegister,
   AddToVRegister,

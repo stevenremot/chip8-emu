@@ -87,7 +87,7 @@ describe("Graphics", () => {
     assert.strictEqual(state.registers.V[0x0f], 1);
   });
 
-  it("Should apply a module on the starting draw coordinates", () => {
+  it("Should apply a sprite on the starting draw coordinates", () => {
     const { state, runner } = makeTestInstance();
 
     state.registers.I = 0x500;
@@ -205,5 +205,35 @@ describe("Graphics", () => {
     );
   });
 
-  it.todo("Should load a font digit on 0xFX29");
+  it.todo("Should load a font digit on 0xFX29", () => {
+    const { state, runner } = makeTestInstance();
+
+    state.registers.V[0] = 0xa;
+    state.registers.V[1] = 1;
+    state.registers.V[2] = 1;
+
+    state.mainMemory.writeRange(
+      state.registers.PC,
+      new Uint8Array([0xf0, 0x29, 0xd1, 0x25]),
+    );
+
+    runner.runOneInstruction();
+    runner.runOneInstruction();
+
+    assertScreenEquals(
+      state.screenMemory,
+      [
+        [0, 10],
+        [0, 7],
+      ],
+      `
+      ..........
+      .####.....
+      .#..#.....
+      .####.....
+      .#..#.....
+      .#..#.....
+      ..........`,
+    );
+  });
 });
