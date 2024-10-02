@@ -2,11 +2,12 @@ import { describe, it } from "node:test";
 import { State } from "../src/state.js";
 import { Runner } from "../src/runner.js";
 import assert from "node:assert";
+import { MockInputManager } from "./mocks/mock-input-manager.js";
 
 describe("Registers", () => {
   it("Should set the index pointer in OxaXXX", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.mainMemory.writeRange(
       state.registers.PC,
@@ -19,7 +20,7 @@ describe("Registers", () => {
 
   it("Should set the register VK value in 0x6XKK", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.mainMemory.writeRange(
       state.registers.PC,
@@ -32,7 +33,7 @@ describe("Registers", () => {
 
   it("Should add KK to register VX on 0x7XKK", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.mainMemory.writeRange(
       state.registers.PC,
@@ -46,7 +47,7 @@ describe("Registers", () => {
 
   it("Should copy VY to VX on 0x8XY0", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.V[0] = 0xf0;
     state.registers.V[0xa] = 1;
@@ -62,7 +63,7 @@ describe("Registers", () => {
 
   it("Should perform VX=VX|VY on Ox8XY1", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.V[0] = 0xf0;
     state.registers.V[0xa] = 0x23;
@@ -78,7 +79,7 @@ describe("Registers", () => {
 
   it("Should perform VX=VX&VY on Ox8XY2", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.V[0] = 0xf0;
     state.registers.V[0xa] = 0x23;
@@ -94,7 +95,7 @@ describe("Registers", () => {
 
   it("Should perform VX=VX^VY on Ox8XY3", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.V[0] = 0xf0;
     state.registers.V[0xa] = 0x23;
@@ -110,7 +111,7 @@ describe("Registers", () => {
 
   it.todo("Should perform VX=VX+VY and set the carry in VF on Ox8XY4", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.V[0] = 0xf0;
     state.registers.V[0xa] = 1;
@@ -132,7 +133,7 @@ describe("Registers", () => {
 
   it("Should perform VX=VX-VY and set the carry in VF on Ox8XY5", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.V[0] = 0xf0;
     state.registers.V[0xa] = 1;
@@ -154,7 +155,7 @@ describe("Registers", () => {
 
   it("Should perform VX=VY-VX and set the carry in VF on Ox8XY7", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.V[0] = 0xf0;
     state.registers.V[0xa] = 1;
@@ -176,7 +177,7 @@ describe("Registers", () => {
 
   it("Should perform VX=VX>>1 and set the carry in VF on Ox8XY6 (S-CHIP behaviour)", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.V[0] = 0xf1;
     state.registers.V[0xa] = 0xf9;
@@ -192,7 +193,7 @@ describe("Registers", () => {
 
   it("Should perform VX=VX<<1 and set the carry in VF on Ox8XYE (S-CHIP behaviour)", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.V[0] = 0xf0;
     state.registers.V[0xa] = 0xf9;
@@ -208,7 +209,7 @@ describe("Registers", () => {
 
   it("Add VX to I on 0xFX1E", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.V[0] = 0xf0;
     state.registers.I = 0x234;

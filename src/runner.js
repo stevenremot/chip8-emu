@@ -1,19 +1,28 @@
 import { AnimationFrameLoop } from "./animation-frame-loop.js";
+import { Effect } from "./effect.js";
+import { InputManager } from "./input-manager.js";
 import { makeInstruction } from "./instructions/make-instruction.js";
 import { State } from "./state.js";
 import { logger } from "./utils/logger.js";
 
 export class Runner {
+  #isRunning = false;
+
   /**
    * @param {State} state
+   * @param {InputManager} inputManager
    */
-  constructor(state) {
+  constructor(state, inputManager) {
     this.state = state;
+    this.inputManager = inputManager;
   }
 
   run() {
+    this.#isRunning = true;
     const loop = new AnimationFrameLoop(() => {
-      this.runOneInstruction();
+      if (this.#isRunning) {
+        this.runOneInstruction();
+      }
     }, 700);
 
     return loop.start();
@@ -42,6 +51,21 @@ ${this.state.registers}`,
       return;
     }
     logger.log(` [RUNNER] instruction: ${instruction.constructor.name}`);
-    instruction.execute(this.state);
+    const result = instruction.execute(this.state);
+
+    if (result && result instanceof Effect) {
+      this.#isRunning = false;
+      result.run({
+        state: this.state,
+        inputManager: this.inputManager,
+        callback: () => {
+          this.#isRunning = true;
+        },
+      });
+    }
+  }
+
+  get isRunning() {
+    return this.#isRunning;
   }
 }

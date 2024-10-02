@@ -2,11 +2,12 @@ import { describe, it } from "node:test";
 import { State } from "../src/state.js";
 import { Runner } from "../src/runner.js";
 import assert from "node:assert";
+import { MockInputManager } from "./mocks/mock-input-manager.js";
 
 describe("Memory", () => {
   it("Should store the 3-digit decimals of VX at the address I on 0xFX33", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.V[1] = 123;
     state.registers.I = 0xf33;
@@ -26,7 +27,7 @@ describe("Memory", () => {
 
   it("Should store V0 to VX at I on 0xFX55 (modern behaviour without I being changed", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.V[0] = 0x12;
     state.registers.V[1] = 0x34;
@@ -49,7 +50,7 @@ describe("Memory", () => {
 
   it("Should load V0 through VX at I on 0xFX65 (modern behaviour withtout I being changed", () => {
     const state = State.makeClearState();
-    const runner = new Runner(state);
+    const runner = new Runner(state, new MockInputManager());
 
     state.registers.I = 0xf55;
 

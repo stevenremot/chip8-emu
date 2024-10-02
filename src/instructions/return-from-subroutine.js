@@ -15,11 +15,11 @@ export class ReturnFromSubroutine {
    * @param {State} state
    */
   execute(state) {
-    if (state.registers.stack.length === 0) {
+    const newAddress = state.registers.stack.pop();
+    if (typeof newAddress === "undefined") {
       throw new Error("Cannot return from subroutine; empty stack");
     }
 
-    const newAddress = state.registers.stack.pop();
     state.registers.PC = newAddress;
   }
 }

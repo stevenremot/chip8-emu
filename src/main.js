@@ -4,6 +4,8 @@ import { Runner } from "./runner.js";
 import { logger } from "./utils/logger.js";
 import { screenMemoryToASCII } from "./utils/screen-memory-to-ascii.js";
 import { WebFileLoader } from "./web-file-loader.js";
+import "./input-button.js";
+import { InputManager } from "./input-manager.js";
 
 /**
  * @type {AnimationFrameLoop[]}
@@ -32,7 +34,7 @@ function start() {
     });
 
     loops = [
-      new Runner(state).run(),
+      new Runner(state, new InputManager()).run(),
 
       new CanvasRenderer(
         /** @type {HTMLCanvasElement} */ (canvas),

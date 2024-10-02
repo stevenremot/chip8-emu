@@ -15,11 +15,17 @@ A basic web-basec CHIP-8 emulator, made for training purposes.
 - [X] Screen : canvas renderer
 - [X] IBM logo
 - [X] Write tests for all instructions
-- [ ] Registers
-- [ ] Control flow
+- [X] Registers
+- [X] Control flow
+- [ ] Timer
 - [ ] Inputs
-- [ ] Fonts
+- [X] Fonts
 - [ ] Sound
+
+## Bonus TODO:
+
+- [ ] Register roms
+- [ ] Add save states management
 
 ## Resources
 

@@ -7,12 +7,16 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
-    padding: 5rem;
+    gap: 0rem;
+    padding: 2rem;
     margin: 0;
 
     height: 100dvh;
     width: 100dvw;
+}
+
+input[type="file"] {
+    margin: 1rem;
 }
 
 canvas {
@@ -20,4 +24,30 @@ canvas {
     width: 100%;
     image-rendering: pixelated;
     border: 1px solid black;
+}
+
+.buttons {
+    flex: 1 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+chip8-input-button {
+    display: contents;
+
+    button {
+        text-transform: uppercase;
+        min-height: 2rem;
+        background: transparent;
+        border: 1px solid black;
+        border-radius: 0;
+
+        transition: background 0.2s;
+
+        &.pressed {
+            background: lightgray;
+        }
+    }
 }

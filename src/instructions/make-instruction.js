@@ -17,6 +17,7 @@ import { SkipOnVRegistersValuesEquals } from "./skip-on-v-registers-values-equal
 import { SkipOnVRegistersValuesNotEquals } from "./skip-on-v-registers-values-not-equals.js";
 import { StoreBinaryCodedDecimal } from "./store-binary-coded-decimal.js";
 import { StoreVRegisterToMemory } from "./store-v-register-to-memory.js";
+import { WaitForKeyPress } from "./wait-for-key-press.js";
 
 const instructions = [
   Noop,
@@ -38,6 +39,7 @@ const instructions = [
   StoreVRegisterToMemory,
   LoadVRegistersFromMemory,
   StoreBinaryCodedDecimal,
+  WaitForKeyPress,
 ];
 
 /**

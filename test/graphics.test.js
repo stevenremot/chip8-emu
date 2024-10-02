@@ -4,10 +4,11 @@ import { State } from "../src/state.js";
 import { Runner } from "../src/runner.js";
 import { ScreenMemory } from "../src/screen-memory.js";
 import { screenMemoryToASCII } from "../src/utils/screen-memory-to-ascii.js";
+import { MockInputManager } from "./mocks/mock-input-manager.js";
 
 const makeTestInstance = () => {
   const state = State.makeClearState();
-  const runner = new Runner(state);
+  const runner = new Runner(state, new MockInputManager());
 
   return { state, runner };
 };
