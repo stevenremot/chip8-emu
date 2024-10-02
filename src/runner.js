@@ -1,6 +1,7 @@
 import { AnimationFrameLoop } from "./animation-frame-loop.js";
 import { makeInstruction } from "./instructions/make-instruction.js";
 import { State } from "./state.js";
+import { logger } from "./utils/logger.js";
 
 export class Runner {
   /**
@@ -20,6 +21,11 @@ export class Runner {
 
   runOneInstruction() {
     const opcode = this.state.mainMemory.readNumber(this.state.registers.PC, 2);
+    logger.log(
+      `[RUNNER] opcode: 0x${opcode.toString(16)}
+${this.state.registers}`,
+    );
+
     this.state.registers.PC += 2;
     this.execute(opcode);
   }
@@ -35,7 +41,7 @@ export class Runner {
       );
       return;
     }
-
+    logger.log(` [RUNNER] instruction: ${instruction.constructor.name}`);
     instruction.execute(this.state);
   }
 }

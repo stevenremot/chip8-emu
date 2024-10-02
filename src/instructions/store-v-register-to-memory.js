@@ -22,6 +22,7 @@ export class StoreVRegisterToMemory {
       (_, i) => state.registers.V[i],
     );
     state.mainMemory.writeRange(address, new Uint8Array(values));
-    state.registers.I += maxRegister + 1;
+    // Legacy behaviour, kept fo reference
+    // state.registers.I += maxRegister + 1;
   }
 }

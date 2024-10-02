@@ -16,7 +16,11 @@ export class AnimationFrameLoop {
     const frameInterval = 1000 / targetFPS;
 
     const loop = (/** @type {number} */ currentTime) => {
-      const deltaTime = currentTime - lastTime;
+      let deltaTime = currentTime - lastTime;
+      if (deltaTime > 1000) {
+        deltaTime = frameInterval;
+      }
+
       lastTime = currentTime;
       accumulatedTime += deltaTime;
 

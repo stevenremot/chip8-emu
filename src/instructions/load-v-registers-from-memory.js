@@ -18,7 +18,8 @@ export class LoadVRegistersFromMemory {
     const address = state.registers.I;
     const maxRegister = (this.opcode & 0x0f00) >> 8;
     const values = state.mainMemory.readRange(address, maxRegister + 1);
-    state.registers.I += maxRegister + 1;
+    // Legacy behaviour, kept for reference
+    // state.registers.I += maxRegister + 1;
     for (let i = 0; i <= maxRegister; i++) {
       state.registers.V[i] = values[i];
     }

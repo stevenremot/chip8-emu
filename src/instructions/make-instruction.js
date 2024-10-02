@@ -1,4 +1,5 @@
 import { AddToVRegister } from "./add-to-v-register.js";
+import { AddVRegisterToIndexPointer } from "./add-v-register-to-index-pointer.js";
 import { CallSubroutine } from "./call-subroutine.js";
 import { ClearScreen } from "./clear-screen.js";
 import { DoArithmeticInVRegister } from "./do-arithmetic-in-v-register.js";
@@ -25,6 +26,7 @@ const instructions = [
   SetIndexPointer,
   SetVRegister,
   AddToVRegister,
+  AddVRegisterToIndexPointer,
   Jump,
   CallSubroutine,
   ReturnFromSubroutine,

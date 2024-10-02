@@ -41,11 +41,15 @@ const operations = {
       ? { result: result + 0x100, carry: 0 }
       : { result, carry: 1 };
   },
-  6: function shiftRight(_a, b) {
-    return { result: b >> 1, carry: b & 1 };
+  6: function shiftRight(a, _b) {
+    // original chip-8 behaviour, kept for reference
+    // return { result: b >> 1, carry: b & 1 };
+    return { result: a >> 1, carry: a & 1 };
   },
-  [0xe]: function shiftRight(_a, b) {
-    return { result: (b << 1) & 0xff, carry: b >> 7 };
+  [0xe]: function shiftRight(a, _b) {
+    // original chip-8 behaviour, kept for reference
+    // return { result: (b << 1) & 0xff, carry: b >> 7 };
+    return { result: (a << 1) & 0xff, carry: a >> 7 };
   },
 };
 

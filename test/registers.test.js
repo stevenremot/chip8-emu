@@ -174,11 +174,11 @@ describe("Registers", () => {
     assert.strictEqual(state.registers.V[0xf], 0);
   });
 
-  it("Should perform VX=VY>>1 and set the carry in VF on Ox8XY6", () => {
+  it("Should perform VX=VX>>1 and set the carry in VF on Ox8XY6 (S-CHIP behaviour)", () => {
     const state = State.makeClearState();
     const runner = new Runner(state);
 
-    state.registers.V[0] = 0xf0;
+    state.registers.V[0] = 0xf1;
     state.registers.V[0xa] = 0xf9;
     state.mainMemory.writeRange(
       state.registers.PC,
@@ -186,11 +186,11 @@ describe("Registers", () => {
     );
     runner.runOneInstruction();
 
-    assert.strictEqual(state.registers.V[0], 0x7c);
+    assert.strictEqual(state.registers.V[0], 0x78);
     assert.strictEqual(state.registers.V[0xf], 1);
   });
 
-  it("Should perform VX=VY<<1 and set the carry in VF on Ox8XYE", () => {
+  it("Should perform VX=VX<<1 and set the carry in VF on Ox8XYE (S-CHIP behaviour)", () => {
     const state = State.makeClearState();
     const runner = new Runner(state);
 
@@ -202,9 +202,23 @@ describe("Registers", () => {
     );
     runner.runOneInstruction();
 
-    assert.strictEqual(state.registers.V[0], 0xf2);
+    assert.strictEqual(state.registers.V[0], 0xe0);
     assert.strictEqual(state.registers.V[0xf], 1);
   });
 
-  it.todo("Add VX to I on 0xFX1E");
+  it("Add VX to I on 0xFX1E", () => {
+    const state = State.makeClearState();
+    const runner = new Runner(state);
+
+    state.registers.V[0] = 0xf0;
+    state.registers.I = 0x234;
+
+    state.mainMemory.writeRange(
+      state.registers.PC,
+      new Uint8Array([0xf0, 0x1e]),
+    );
+    runner.runOneInstruction();
+
+    assert.strictEqual(state.registers.I, 0x324);
+  });
 });

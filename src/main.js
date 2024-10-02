@@ -1,6 +1,7 @@
 import { AnimationFrameLoop } from "./animation-frame-loop.js";
 import { CanvasRenderer } from "./canvas-renderer.js";
 import { Runner } from "./runner.js";
+import { logger } from "./utils/logger.js";
 import { screenMemoryToASCII } from "./utils/screen-memory-to-ascii.js";
 import { WebFileLoader } from "./web-file-loader.js";
 
@@ -44,3 +45,5 @@ function start() {
 }
 
 document.addEventListener("DOMContentLoaded", start);
+
+Object.assign(window, { logger });

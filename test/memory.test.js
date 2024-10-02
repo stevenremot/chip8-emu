@@ -24,7 +24,7 @@ describe("Memory", () => {
     );
   });
 
-  it("Should store V0 to VX at I and set I=I+X+1 on 0xFX55", () => {
+  it("Should store V0 to VX at I on 0xFX55 (modern behaviour without I being changed", () => {
     const state = State.makeClearState();
     const runner = new Runner(state);
 
@@ -40,14 +40,14 @@ describe("Memory", () => {
 
     runner.runOneInstruction();
 
-    assert.strictEqual(state.registers.I, 0xf58);
+    assert.strictEqual(state.registers.I, 0xf55);
     assert.deepStrictEqual(
       state.mainMemory.readRange(0xf55, 3),
       new Uint8Array([0x12, 0x34, 0x56]),
     );
   });
 
-  it("Should load V0 through VX at I on set I=I+X+1 on 0xFX65", () => {
+  it("Should load V0 through VX at I on 0xFX65 (modern behaviour withtout I being changed", () => {
     const state = State.makeClearState();
     const runner = new Runner(state);
 
@@ -62,7 +62,7 @@ describe("Memory", () => {
 
     runner.runOneInstruction();
 
-    assert.strictEqual(state.registers.I, 0xf58);
+    assert.strictEqual(state.registers.I, 0xf55);
     assert.deepStrictEqual(
       state.registers.V,
       [0x12, 0x34, 0x56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
