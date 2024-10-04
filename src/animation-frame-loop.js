@@ -2,11 +2,13 @@ export class AnimationFrameLoop {
   /**
    * @param {(deltaTime: number) => void} callback
    * @param {number} fps
+   * @param {() => void} [onStop]
    */
-  constructor(callback, fps) {
+  constructor(callback, fps, onStop) {
     this.callback = callback;
     this.fps = fps;
     this.animationFrameId = null;
+    this.onStop = onStop;
   }
 
   start() {
@@ -41,6 +43,9 @@ export class AnimationFrameLoop {
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = null;
     }
+
+    this.onStop?.();
+
     return this;
   }
 }

@@ -4,10 +4,12 @@
   "packageManager": "yarn@4.3.1",
   "scripts": {
     "type:check": "tsc --noEmit",
-    "test:watch": "node --inspect --test --watch test/*"
+    "test:watch": "node --inspect --test --watch test/*",
+    "start": "npx http-server -c 0 src/"
   },
   "devDependencies": {
     "@types/node": "^22.7.3",
+    "prettier": "^3.3.3",
     "typescript": "^5.6.2"
   }
 }

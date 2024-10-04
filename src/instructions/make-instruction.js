@@ -11,7 +11,10 @@ import { LoadFont } from "./load-font.js";
 import { LoadVRegistersFromMemory } from "./load-v-registers-from-memory.js";
 import { Noop } from "./noop.js";
 import { ReturnFromSubroutine } from "./return-from-subroutine.js";
+import { SaveTimerToV } from "./save-timer-to-v.js";
 import { SetIndexPointer } from "./set-index-pointer.js";
+import { SetSoundTimer } from "./set-sound-timer.js";
+import { SetTimer } from "./set-timer.js";
 import { SetVRegister } from "./set-v-register.js";
 import { SkipOnKeyPress } from "./skip-on-key-press.js";
 import { SkipOnVRegisterValueEquals } from "./skip-on-v-register-value-equals.js";
@@ -58,6 +61,9 @@ const instructions = [
   WaitForKeyPress,
   SkipOnKeyPress,
   StoreRandomValue,
+  SetTimer,
+  SetSoundTimer,
+  SaveTimerToV
 ];
 
 /**

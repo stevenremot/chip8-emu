@@ -85,7 +85,7 @@ export class DoArithmeticInVRegister {
       state.registers.V[registerNumber1],
       state.registers.V[registerNumber2],
     );
-    state.registers.V[0xf] = carry;
     state.registers.V[registerNumber1] = result;
+    state.registers.V[0xf] = carry;
   }
 }

@@ -21,7 +21,35 @@ describe("Effects", () => {
     assert.strictEqual(state.registers.V[0x5], 0x03);
   });
 
-  it.todo("should initialize timer to VX on 0xFX15");
+  it("should initialize timer to VX on 0xFX15", () => {
+    const state = State.makeClearState();
+    const runner = new Runner(state, new MockInputManager());
 
-  it.todo("Should save current timer value in VX on 0xfX07");
+    state.registers.V[4] = 0x56;
+
+    state.mainMemory.writeRange(
+      state.registers.PC,
+      new Uint8Array([0xf4, 0x15]),
+    );
+
+    runner.runOneInstruction();
+
+    assert.strictEqual(state.registers.delayTimer, 0x56);
+  });
+
+  it("Should save current timer value in VX on 0xfX07", () => {
+    const state = State.makeClearState();
+    const runner = new Runner(state, new MockInputManager());
+
+    state.registers.delayTimer = 0x78;
+
+    state.mainMemory.writeRange(
+      state.registers.PC,
+      new Uint8Array([0xf4, 0x07]),
+    );
+
+    runner.runOneInstruction();
+
+    assert.strictEqual(state.registers.V[4], 0x78);
+  });
 });

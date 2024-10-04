@@ -207,6 +207,21 @@ describe("Registers", () => {
     assert.strictEqual(state.registers.V[0xf], 1);
   });
 
+  it("Should give precedence to the carry on arithmetic operation when the left operand is VF", () => {
+    const state = State.makeClearState();
+    const runner = new Runner(state, new MockInputManager());
+
+    state.registers.V[0xf] = 0xf1;
+    state.registers.V[0xa] = 0xf9;
+    state.mainMemory.writeRange(
+      state.registers.PC,
+      new Uint8Array([0x8f, 0xa6]),
+    );
+    runner.runOneInstruction();
+
+    assert.strictEqual(state.registers.V[0xf], 1);
+  });
+
   it("Add VX to I on 0xFX1E", () => {
     const state = State.makeClearState();
     const runner = new Runner(state, new MockInputManager());

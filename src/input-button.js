@@ -10,6 +10,10 @@ export class InputButton extends HTMLElement {
       "pointerup",
       this.onPointerUp.bind(this),
     );
+    this.querySelector("button")?.addEventListener(
+      "pointerout",
+      this.onPointerUp.bind(this),
+    );
 
     const keyboard = this.getAttribute("keyboard") ?? "";
 

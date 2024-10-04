@@ -22,7 +22,7 @@ export class Registers {
 
   toString() {
     return `PC: ${hex(this.PC)}, I: ${hex(this.I)}
-${this.V.map((value, index) => `V${index}: ${hex(value)}`).join(", ")}
+${this.V.map((value, index) => `V${index.toString(16)}: ${hex(value)}`).join(", ")}
 stack: ${this.stack.map(hex).join(", ")}`;
   }
 }

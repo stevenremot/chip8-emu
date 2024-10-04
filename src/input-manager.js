@@ -5,27 +5,36 @@ const initialKeyStates = Array.from({ length: 16 }, () => false);
  */
 
 export class InputManager {
+  #isStopped = false;
   #keyStates = Array.from(initialKeyStates);
 
   /**
    * @param {HTMLElement} body
    */
   attachTo(body) {
-    // @ts-ignore
-    body.addEventListener(
-      "chip8:input-pressed",
-      (/** @type {Chip8KeyEvent} */ evt) => {
-        this.#keyStates[evt.detail.keyCode] = true;
-      },
-    );
+    const handlePressed = (/** @type {Chip8KeyEvent} */ evt) => {
+      this.#keyStates[evt.detail.keyCode] = true;
+    };
+
+    const handleReleased = (/** @type {Chip8KeyEvent} */ evt) => {
+      this.#keyStates[evt.detail.keyCode] = false;
+    };
 
     // @ts-ignore
-    body.addEventListener(
-      "chip8:input-released",
-      (/** @type {Chip8KeyEvent} */ evt) => {
-        this.#keyStates[evt.detail.keyCode] = false;
+    body.addEventListener("chip8:input-pressed", handlePressed);
+    // @ts-ignore
+    body.addEventListener("chip8:input-released", handleReleased);
+
+    return {
+      stop: () => {
+        this.#isStopped = true;
+
+        // @ts-ignore
+        body.removeEventListener("chip8:input-pressed", handlePressed);
+        // @ts-ignore
+        body.removeEventListener("chip8:input-released", handleReleased);
       },
-    );
+    };
   }
 
   /**
@@ -35,7 +44,9 @@ export class InputManager {
     const listener = (
       /** @type {CustomEvent<{ keyCode: number; }>} */ event,
     ) => {
-      callback(event.detail.keyCode);
+      if (!this.#isStopped) {
+        callback(event.detail.keyCode);
+      }
     };
 
     // @ts-ignore

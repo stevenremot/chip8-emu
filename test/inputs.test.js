@@ -24,6 +24,9 @@ describe("Inputs", () => {
     assert.strictEqual(state.registers.PC, 0x202);
     runner.runOneInstruction();
 
+    // Check the runner has not been blocked
+    assert.strictEqual(runner.isRunning, true);
+
     // Wrong key pressed
     inputManager.mockPressKey(9);
 
@@ -57,6 +60,9 @@ describe("Inputs", () => {
     runner.runOneInstruction();
 
     assert.strictEqual(state.registers.PC, 0x204);
+
+    // Check the runner has not been blocked
+    assert.strictEqual(runner.isRunning, true);
 
     // Wrong key pressed
     inputManager.mockPressKey(9);

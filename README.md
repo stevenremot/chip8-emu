@@ -17,10 +17,10 @@ A basic web-basec CHIP-8 emulator, made for training purposes.
 - [X] Write tests for all instructions
 - [X] Registers
 - [X] Control flow
-- [ ] Timer
-- [ ] Inputs
+- [x] Timer
+- [x] Inputs
 - [X] Fonts
-- [ ] Sound
+- [x] Sound
 
 ## Bonus TODO:
 
