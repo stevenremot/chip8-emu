@@ -3,33 +3,31 @@
 }
 
 body {
-  font-family: sans-serif;
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.console {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  aspect-ratio: 1 / 2;
+  height: 100%;
+  background-color: hsl(0 0 95);
+  box-shadow: 0.2rem 0.2rem 0.5rem hsl(0 0 80);
+  border-radius: 1rem;
   gap: 1rem;
+  padding: 1rem;
+}
+
+body {
+  font-family: sans-serif;
   padding: 2rem;
   margin: 0;
 
   height: 100dvh;
   width: 100dvw;
-
-  grid-template-areas:
-    "screen screen"
-    "keyboard menu";
-
-  grid-auto-columns: 1fr max-content;
-  grid-auto-rows: min-content 1fr;
-
-  .screen {
-    grid-area: screen;
-  }
-
-  .keyboard {
-    grid-area: keyboard;
-  }
-
-  .menu {
-    grid-area: menu;
-  }
 }
 
 dialog {
