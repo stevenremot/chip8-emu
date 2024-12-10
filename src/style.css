@@ -1,53 +1,42 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0rem;
-    padding: 2rem;
-    margin: 0;
+  font-family: sans-serif;
+  display: grid;
+  gap: 1rem;
+  padding: 2rem;
+  margin: 0;
 
-    height: 100dvh;
-    width: 100dvw;
+  height: 100dvh;
+  width: 100dvw;
+
+  grid-template-areas:
+    "screen screen"
+    "keyboard menu";
+
+  grid-auto-columns: 1fr max-content;
+  grid-auto-rows: min-content 1fr;
+
+  .screen {
+    grid-area: screen;
+  }
+
+  .keyboard {
+    grid-area: keyboard;
+  }
+
+  .menu {
+    grid-area: menu;
+  }
 }
 
-input[type="file"] {
-    margin: 1rem;
+dialog {
+  border: transparent;
+  border-radius: 1rem;
 }
 
-canvas {
-    aspect-ratio: 2 / 1;
-    width: 100%;
-    image-rendering: pixelated;
-    border: 1px solid black;
-}
-
-.buttons {
-    flex: 1 0 auto;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-}
-
-chip8-input-button {
-    display: contents;
-
-    button {
-        text-transform: uppercase;
-        min-height: 2rem;
-        background: transparent;
-        border: 1px solid black;
-        border-radius: 0;
-
-        transition: background 0.2s;
-
-        &.pressed {
-            background: lightgray;
-        }
-    }
+dialog::backdrop {
+  background-color: hsla(0, 0, 50, 0.5);
 }

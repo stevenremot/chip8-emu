@@ -1,0 +1,17 @@
+chip-input-button {
+  display: contents;
+
+  button {
+    text-transform: uppercase;
+    min-height: 2rem;
+    background: transparent;
+    border: 1px solid black;
+    border-radius: 0;
+
+    transition: background 0.2s;
+
+    &.pressed {
+      background: lightgray;
+    }
+  }
+}

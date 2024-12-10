@@ -1,4 +1,6 @@
-export class InputButton extends HTMLElement {
+import "./chip-input-button.style.css";
+
+export class ChipInputButton extends HTMLElement {
   constructor() {
     super();
     this.innerHTML = `<button type="button">${this.keyCode.toString(16)}</button>`;
@@ -66,4 +68,4 @@ export class InputButton extends HTMLElement {
   }
 }
 
-customElements.define("chip8-input-button", InputButton);
+customElements.define("chip-input-button", ChipInputButton);
