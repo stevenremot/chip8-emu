@@ -1,4 +1,4 @@
-import { describe, it } from "node:test";
+import { describe, it } from "vitest";
 import { MockInputManager } from "./mocks/mock-input-manager.js";
 import { State } from "../src/state.js";
 import assert from "node:assert";

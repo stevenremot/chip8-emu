@@ -1,4 +1,4 @@
-import { describe, it } from "node:test";
+import { describe, it, vi } from "vitest";
 import { State } from "../src/state.js";
 import { Runner } from "../src/runner.js";
 import { MockInputManager } from "./mocks/mock-input-manager.js";
@@ -9,7 +9,7 @@ describe("Effects", () => {
     const state = State.makeClearState();
     const runner = new Runner(state, new MockInputManager());
 
-    test.mock.method(Math, "random", () => 0.7);
+      vi.spyOn(Math, "random").mockReturnValue(0.7);
 
     state.mainMemory.writeRange(
       state.registers.PC,

@@ -1,4 +1,4 @@
-import { describe, it } from "node:test";
+import { describe, it } from "vitest";
 import { State } from "../src/state.js";
 import { Runner } from "../src/runner.js";
 import assert from "node:assert";
@@ -109,7 +109,7 @@ describe("Registers", () => {
     assert.strictEqual(state.registers.V[0], 0xd3);
   });
 
-  it.todo("Should perform VX=VX+VY and set the carry in VF on Ox8XY4", () => {
+  it("Should perform VX=VX+VY and set the carry in VF on Ox8XY4", () => {
     const state = State.makeClearState();
     const runner = new Runner(state, new MockInputManager());
 

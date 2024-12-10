@@ -1,4 +1,4 @@
-import { describe, it } from "node:test";
+import { describe, it, vi } from "vitest";
 import { State } from "../src/state.js";
 import { Runner } from "../src/runner.js";
 import assert from "node:assert";
@@ -6,7 +6,7 @@ import { MockInputManager } from "./mocks/mock-input-manager.js";
 
 describe("Program flow", () => {
   it("Should do nothing but print a log message on 0x0000", ({ mock }) => {
-    const mockedWarn = mock.method(console, "info");
+    const mockedWarn = vi.spyOn(console, "info");
     const state = State.makeClearState();
     const runner = new Runner(state, new MockInputManager());
 
@@ -18,8 +18,8 @@ describe("Program flow", () => {
     runner.runOneInstruction();
 
     assert.strictEqual(state.registers.PC, 0x0202);
-    assert.strictEqual(mockedWarn.mock.callCount(), 1);
-    assert.deepStrictEqual(mockedWarn.mock.calls[0].arguments, [
+    assert.strictEqual(mockedWarn.mock.calls.length, 1);
+    assert.deepStrictEqual(mockedWarn.mock.calls[0], [
       "Noop instruction reached; do nothing",
     ]);
   });

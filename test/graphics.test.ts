@@ -1,4 +1,4 @@
-import { describe, it } from "node:test";
+import { describe, it } from "vitest";
 import assert from "node:assert";
 import { State } from "../src/state.js";
 import { Runner } from "../src/runner.js";
@@ -13,12 +13,7 @@ const makeTestInstance = () => {
   return { state, runner };
 };
 
-/**
- * @param {ScreenMemory} screenMemory
- * @param {[[number, number], [number, number]]} range
- * @param {string} expected
- */
-const assertScreenEquals = (screenMemory, range, expected) => {
+const assertScreenEquals = (screenMemory: ScreenMemory, range: [[number, number], [number, number]], expected: string) => {
   const asciiScreen = screenMemoryToASCII(screenMemory, range);
   assert.strictEqual(
     asciiScreen,
@@ -206,7 +201,7 @@ describe("Graphics", () => {
     );
   });
 
-  it.todo("Should load a font digit on 0xFX29", () => {
+  it("Should load a font digit on 0xFX29", () => {
     const { state, runner } = makeTestInstance();
 
     state.registers.V[0] = 0xa;

@@ -1,4 +1,4 @@
-import { describe, it } from "node:test";
+import { describe, it } from "vitest";
 import { State } from "../src/state.js";
 import { Runner } from "../src/runner.js";
 import assert from "node:assert";
